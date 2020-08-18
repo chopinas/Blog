@@ -268,12 +268,10 @@ yum install -y vsftpd
 
 
 相关配置文件
-&lt;!–hexoPostRenderEscape:cd /etc/vsftpd
-
-
+cd /etc/vsftpd
 /etc/vsftpd/vsftpd.conf //主配置文件，核心配置文件
 /etc/vsftpd/ftpusers //黑名单，这个里面的用户不允许访问FTP服务器
-/etc/
+/etc/vsftpd/user_list //白名单，允许访问FT
         </a>
       </p>
 

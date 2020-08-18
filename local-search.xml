@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>4_opengl</title>
+    <link href="/2020/08/18/4-opengl/"/>
+    <url>/2020/08/18/4-opengl/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>3_ueei_ubuntudownload</title>
+    <link href="/2020/08/18/3-ueei-ubuntudownload/"/>
+    <url>/2020/08/18/3-ueei-ubuntudownload/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>2_register</title>
+    <link href="/2020/08/18/2-register/"/>
+    <url>/2020/08/18/2-register/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>FTP的安装与配置(centos)</title>
+    <link href="/2020/08/18/1-ftp/"/>
+    <url>/2020/08/18/1-ftp/</url>
+    
+    <content type="html"><![CDATA[<ol><li><p>安装vsftpd，直接yum 安装就可以了</p><pre><code class="hljs cmake">yum <span class="hljs-keyword">install</span> -y vsftpd</code></pre></li><li><p>出现下图表示下载成功</p><p><img src="https://s1.ax1x.com/2020/08/18/dnfuse.png"></p></li><li><p>相关配置文件</p><p>&lt;!–hexoPostRenderEscape:<pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> <span class="hljs-string">/etc/vsftpd</span></p></li></ol><p><span class="hljs-string">/etc/vsftpd/vsftpd.conf</span> <span class="hljs-string">//</span>主配置文件，核心配置文件</p><p><span class="hljs-string">/etc/vsftpd/ftpusers</span> <span class="hljs-string">//</span>黑名单，这个里面的用户不允许访问FTP服务器</p><p><span class="hljs-string">/etc/vsftpd/user_list</span> <span class="hljs-string">//</span>白名单，允许访问FTP服务器的用户列表</code></pre>:hexoPostRenderEscape–&gt;</p><ol start="4"><li><p>启动服务</p><p>&lt;!–hexoPostRenderEscape:<pre><code class="hljs awk">systemctl enable vsftpd.service <span class="hljs-regexp">//</span>设置开机自启动</p></li></ol><p>systemctl start vsftpd.service <span class="hljs-regexp">//</span>启动ftp服务</p><p>netstat -antup | grep ftp <span class="hljs-regexp">//</span>查看ftp服务端</code></pre>:hexoPostRenderEscape–&gt;</p>   <img src="https://s1.ax1x.com/2020/08/18/dnfQZd.png" style="zoom:100%;" /><p>   开通ftp服务对应的防火墙端口:21,然后登录ftp</p><p>   <img src="https://s1.ax1x.com/2020/08/18/dnfZRK.png"></p><ol start="5"><li><p>配置本地用戶登录</p><ol><li><p>ftp用户登录</p><pre><code class="hljs nginx"><span class="hljs-attribute">useradd</span> ftptest   <span class="hljs-comment">#创建ftptest用户</span>passwd ftptest    <span class="hljs-comment">#修改ftptest用户密码</span></code></pre><p><img src="https://s1.ax1x.com/2020/08/18/dnfnMD.png"></p></li><li><p>修改/etc/vsftpd/vsftpd.conf</p><pre><code class="hljs routeros">anonymous <span class="hljs-attribute">enable</span>=<span class="hljs-literal">NO</span><span class="hljs-attribute">local_enable</span>=<span class="hljs-literal">YES</span></code></pre><p><img src="https://s1.ax1x.com/2020/08/18/dnfVG6.png"></p></li><li><p>通过lftp连接到ftp服务器</p><p><img src="https://s1.ax1x.com/2020/08/18/dnfKqH.png"></p></li></ol></li></ol><p>​                                                  本文转载自<a href="https://help.aliyun.com/knowledge_detail/60152.html">https://help.aliyun.com/knowledge_detail/60152.html</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>

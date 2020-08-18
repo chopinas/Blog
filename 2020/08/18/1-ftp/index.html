@@ -123,7 +123,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('https://s1.ax1x.com/2020/08/17/dZRU58.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -195,7 +195,7 @@
 <pre><code class="hljs cmake">yum <span class="hljs-keyword">install</span> -y vsftpd</code></pre>
 </li>
 <li><p>出现下图表示下载成功</p>
-<p><img src="https://s1.ax1x.com/2020/08/18/dnfuse.png" srcset="/img/loading.gif"></p>
+<img src="https://s1.ax1x.com/2020/08/18/dnfuse.png" srcset="/img/loading.gif" style="zoom:150%;" />
 </li>
 <li><p>相关配置文件</p>
 <pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> <span class="hljs-string">/etc/vsftpd</span>
@@ -211,7 +211,7 @@ netstat -antup | grep ftp <span class="hljs-regexp">//</span>查看ftp服务端<
 <img src="https://s1.ax1x.com/2020/08/18/dnfQZd.png" srcset="/img/loading.gif" style="zoom:100%;" />
 
 <p>开通ftp服务对应的防火墙端口:21,然后登录ftp</p>
-<p><img src="https://s1.ax1x.com/2020/08/18/dnfZRK.png" srcset="/img/loading.gif"></p>
+<img src="https://s1.ax1x.com/2020/08/18/dnfZRK.png" srcset="/img/loading.gif" style="zoom:130%;" />
 </li>
 <li><p>配置本地用戶登录</p>
 <ol>
@@ -219,16 +219,17 @@ netstat -antup | grep ftp <span class="hljs-regexp">//</span>查看ftp服务端<
 <pre><code class="hljs nginx"><span class="hljs-attribute">useradd</span> ftptest   <span class="hljs-comment">#创建ftptest用户</span>
 passwd ftptest    <span class="hljs-comment">#修改ftptest用户密码</span></code></pre>
 
-<p><img src="https://s1.ax1x.com/2020/08/18/dnfnMD.png" srcset="/img/loading.gif"></p>
+<img src="https://s1.ax1x.com/2020/08/18/dnfnMD.png" srcset="/img/loading.gif" style="zoom:150%;" />
 </li>
 <li><p>修改/etc/vsftpd/vsftpd.conf</p>
 <pre><code class="hljs routeros">anonymous <span class="hljs-attribute">enable</span>=<span class="hljs-literal">NO</span>
 <span class="hljs-attribute">local_enable</span>=<span class="hljs-literal">YES</span></code></pre>
 
-<p><img src="https://s1.ax1x.com/2020/08/18/dnfVG6.png" srcset="/img/loading.gif"></p>
+<img src="https://s1.ax1x.com/2020/08/18/dnfVG6.png" srcset="/img/loading.gif" style="zoom:150%;" />
 </li>
 <li><p>通过lftp连接到ftp服务器</p>
-<p><img src="https://s1.ax1x.com/2020/08/18/dnfKqH.png" srcset="/img/loading.gif"></p>
+<img src="https://s1.ax1x.com/2020/08/18/dnfKqH.png" srcset="/img/loading.gif" style="zoom:150%;" />
+
 </li>
 </ol>
 </li>

@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>4_opengl - Hexo</title>
+  <title>UEFI模式下安装Ubuntu系统 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -136,7 +136,7 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-18 08:48" pubdate>
+    <time datetime="2020-08-18 08:47" pubdate>
       August 18, 2020 am
     </time>
   </div>
@@ -147,7 +147,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      506 字
     </span>
   
 
@@ -157,7 +157,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      5
        分钟
     </span>
   
@@ -187,10 +187,47 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">4_opengl</h1>
+            <h1 style="display: none">UEFI模式下安装Ubuntu系统</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <p>有的电脑不适合这种方法，可以百度查找legacy模式安装ubuntu方法基本差不多，个别地方的设置不同。</p>
+<ol>
+<li><p>分区（50GB）</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVpgH.md.jpg" srcset="/img/loading.gif"></p>
+<p>图片说这个20G的分区还不能用，其实这样就可以了（因为这个方法是用EFI模式下安装ubuntu），就留着这20G未分配就好了。实际操作中我们还要将这20G改成50G，也就是分配出50G的空间。<br>对分区还不大懂得，可以百度，百度中有更详细的步骤。</p>
+</li>
+<li><p>关闭电脑的快速启动</p>
+<p>windows设置-&gt;系统-&gt;电源和睡眠-&gt;其他电源设置-&gt;选择电源按钮的功能-&gt;更改当前不可用的设置-&gt;把快速启动前的√去掉 保存即可。</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVS8e.md.png" srcset="/img/loading.gif"></p>
+</li>
+<li><p>关闭security boot</p>
+<p>先进入BIOS界面（每个电脑的进入方式不一样，具体百度)</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVPKA.md.png" srcset="/img/loading.gif"></p>
+<p>确保BOOT是UEFI模式，然后将Secure Boot改成disable，保存设置然后退出。</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlViDI.md.png" srcset="/img/loading.gif"></p>
+</li>
+<li><p>插入U盘从U盘启动，安装ubuntu</p>
+<p>然后就是在bios界面下的UEFI模式下选择U盘启动，legacy底下的那些不要选，一定要选UEFI下的USB1-UEFI。</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVV58.md.png" srcset="/img/loading.gif"></p>
+<p>然后就看到下面的画面，选择第二个</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlV9vd.png" srcset="/img/loading.gif"></p>
+</li>
+<li><p>系统安装界面设置</p>
+<p>选择中文点击继续，第二界面两个选项都不勾选点继续，第三界面选其他选项，点击继续。</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVAVP.md.png" srcset="/img/loading.gif"></p>
+<p>这时候就能看到刚刚分区的50G空间(52430MB),点击+号创建分区</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVEUf.md.png" srcset="/img/loading.gif"></p>
+<p>按照图片指示创建,创建到最后一个分区，把所有的容量都给他</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVePS.th.jpg" srcset="/img/loading.gif"></p>
+<p>分区创建好了以后，一定要改启动引导，默认的引导是错的，要改成之前我们创建的那个efi系统分区</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVFbt.md.jpg" srcset="/img/loading.gif"></p>
+<p>剩下的按照常识点就完事了，密码设置短一些。安装完系统后，拔掉U盘，重启电脑。再进入BTOS界面，把secure boot打开，也就是改成enable。</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVm8g.md.png" srcset="/img/loading.gif"></p>
+<p>重启电脑，看到这个界面就说明安装成功了。</p>
+<p><img src="https://s1.ax1x.com/2020/08/19/dlVn2Q.md.png" srcset="/img/loading.gif"></p>
+</li>
+</ol>
+
             </div>
             <hr>
             <div>
@@ -206,12 +243,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2020/08/18/4-opengl/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">4_opengl</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/18/3-ueei-ubuntudownload/">
-                        <span class="hidden-mobile">UEFI模式下安装Ubuntu系统</span>
+                      <a href="/2020/08/18/2-register/">
+                        <span class="hidden-mobile">在注册表添加自定义快速启动程序</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -376,7 +419,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "4_opengl&nbsp;",
+        "UEFI模式下安装Ubuntu系统&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

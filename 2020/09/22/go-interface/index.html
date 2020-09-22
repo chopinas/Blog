@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>4_opengl - Hexo</title>
+  <title>go interface详解 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -136,8 +136,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-18 08:48" pubdate>
-      August 18, 2020 am
+    <time datetime="2020-09-22 21:41" pubdate>
+      September 22, 2020 pm
     </time>
   </div>
 
@@ -147,7 +147,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      599 字
     </span>
   
 
@@ -157,7 +157,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      9
        分钟
     </span>
   
@@ -187,10 +187,96 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">4_opengl</h1>
+            <h1 style="display: none">go interface详解</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <h3 id="1-interface是一种类型"><a href="#1-interface是一种类型" class="headerlink" title="1.interface是一种类型"></a>1.interface是一种类型</h3><p>​    interface是一种具有一组方法的类型，一个类型实现了interface的所有方法，我们说类型实现了该inteface</p>
+<h3 id="2-interface变量存储值"><a href="#2-interface变量存储值" class="headerlink" title="2.interface变量存储值"></a>2.interface变量存储值</h3>  <pre><code class="hljs go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">type</span> Human <span class="hljs-keyword">struct</span> &#123;
+    name  <span class="hljs-keyword">string</span>
+    age   <span class="hljs-keyword">int</span>
+    phone <span class="hljs-keyword">string</span>
+&#125;
+
+<span class="hljs-keyword">type</span> Student <span class="hljs-keyword">struct</span> &#123;
+    Human
+    school <span class="hljs-keyword">string</span>
+    loan   <span class="hljs-keyword">float32</span>
+&#125;
+
+<span class="hljs-keyword">type</span> Employee <span class="hljs-keyword">struct</span> &#123;
+    Human
+    company <span class="hljs-keyword">string</span>
+    money   <span class="hljs-keyword">float32</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(h Human)</span> <span class="hljs-title">SayHi</span><span class="hljs-params">()</span></span> &#123;
+    fmt.Printf(<span class="hljs-string">&quot;Hi, I am %s you can call me on %s\n&quot;</span>, h.name, h.phone)
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(h Human)</span> <span class="hljs-title">Sing</span><span class="hljs-params">(lyrics <span class="hljs-keyword">string</span>)</span></span> &#123;
+    fmt.Println(<span class="hljs-string">&quot;La la la la...&quot;</span>, lyrics)
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(e Employee)</span> <span class="hljs-title">SayHi</span><span class="hljs-params">()</span></span> &#123;
+    fmt.Printf(<span class="hljs-string">&quot;Hi, I am %s, I work at %s. Call me on %s\n&quot;</span>, e.name, e.company, e.phone)
+&#125;
+
+<span class="hljs-keyword">type</span> Men <span class="hljs-keyword">interface</span> &#123;
+    SayHi()
+    Sing(lyrics <span class="hljs-keyword">string</span>)
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+
+    mike := Student&#123;Human&#123;<span class="hljs-string">&quot;Mike&quot;</span>, <span class="hljs-number">25</span>, <span class="hljs-string">&quot;222-222-XXX&quot;</span>&#125;, <span class="hljs-string">&quot;MIT&quot;</span>, <span class="hljs-number">0.00</span>&#125;
+    paul := Student&#123;Human&#123;<span class="hljs-string">&quot;Paul&quot;</span>, <span class="hljs-number">26</span>, <span class="hljs-string">&quot;111-222-XXX&quot;</span>&#125;, <span class="hljs-string">&quot;Harvard&quot;</span>, <span class="hljs-number">100</span>&#125;
+    sam := Employee&#123;Human&#123;<span class="hljs-string">&quot;Sam&quot;</span>, <span class="hljs-number">36</span>, <span class="hljs-string">&quot;444-222-XXX&quot;</span>&#125;, <span class="hljs-string">&quot;Golang Inc.&quot;</span>, <span class="hljs-number">1000</span>&#125;
+    tom := Employee&#123;Human&#123;<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-number">37</span>, <span class="hljs-string">&quot;222-444-XXX&quot;</span>&#125;, <span class="hljs-string">&quot;Things Ltd.&quot;</span>, <span class="hljs-number">5000</span>&#125;
+
+    <span class="hljs-keyword">var</span> m, p, s, t Men = mike, paul, sam, tom
+
+    m.SayHi()
+    p.SayHi()
+    s.SayHi()
+    t.SayHi()
+&#125;
+</code></pre>
+
+<p>多种类型实现了某个接口，这些类型的值都可以直接使用interface的变量存储</p>
+<h3 id="3-interface类型断言"><a href="#3-interface类型断言" class="headerlink" title="3.interface类型断言"></a>3.interface类型断言</h3><p>​    em代表interface类型的变量，T代表断言的类型，value是interface变量存储值，ok：bool类型</p>
+<pre><code class="hljs go"><span class="hljs-keyword">if</span> t, ok := i.(*S); ok &#123;
+    fmt.Println(<span class="hljs-string">&quot;s implements I&quot;</span>, t)
+&#125;</code></pre>
+
+<h3 id="4-空interface"><a href="#4-空interface" class="headerlink" title="4.空interface"></a>4.空interface</h3><p>​    空的interface可以接受任何类型作为参数</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">doSthing</span><span class="hljs-params">(v <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span>&#123;&#125;</code></pre>
+
+<p>​    参数v可以接受任何类型，但是函数被调用时在函数内部不代表任何类型，因为go在执行时传递给函数的任何类型都自动转换成interface{}</p>
+<p>​    那么一个interface{的slice是否可以接受任何类型的slice？</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">printAll</span><span class="hljs-params">(vals []<span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123; 
+    <span class="hljs-keyword">for</span> _, val := <span class="hljs-keyword">range</span> vals &#123;
+        fmt.Println(val)
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;
+    names := []<span class="hljs-keyword">string</span>&#123;<span class="hljs-string">&quot;stanley&quot;</span>, <span class="hljs-string">&quot;david&quot;</span>, <span class="hljs-string">&quot;oscar&quot;</span>&#125;
+    printAll(names)
+&#125;</code></pre>
+
+<p>​    执行之后会报错，因为interface{}会占用两个字长的存储空间，一个是自身的method数据，一个是指向其存储值的指针，因而slice []interface的长度是固定的N*2,但是[]T的长度是 <code>N\*sizeof(T)</code>，两者的实际存储值是有区别的。</p>
+<p>​    但是我们也能手动转换</p>
+<pre><code class="hljs go"><span class="hljs-keyword">var</span> dataSlice []<span class="hljs-keyword">int</span> = foo()
+<span class="hljs-keyword">var</span> interfaceSlice []<span class="hljs-keyword">interface</span>&#123;&#125; = <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">interface</span>&#123;&#125;, <span class="hljs-built_in">len</span>(dataSlice))
+<span class="hljs-keyword">for</span> i, d := <span class="hljs-keyword">range</span> dataSlice &#123;
+    interfaceSlice[i] = d
+&#125;</code></pre>
+
+
             </div>
             <hr>
             <div>
@@ -206,18 +292,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/22/go-interface/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">go interface详解</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/18/3-ueei-ubuntudownload/">
-                        <span class="hidden-mobile">UEFI模式下安装Ubuntu系统</span>
+                      <a href="/2020/08/18/4-opengl/">
+                        <span class="hidden-mobile">4_opengl</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -382,7 +462,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "4_opengl&nbsp;",
+        "go interface详解&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

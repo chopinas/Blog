@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>算法篇之NP问题 - Hexo</title>
+  <title>pytorch入门学习1 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -136,8 +136,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-10-19 21:09" pubdate>
-      October 19, 2020 pm
+    <time datetime="2020-11-04 18:14" pubdate>
+      November 4, 2020 pm
     </time>
   </div>
 
@@ -147,7 +147,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      910 字
+      848 字
     </span>
   
 
@@ -157,7 +157,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      13
        分钟
     </span>
   
@@ -187,22 +187,166 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">算法篇之NP问题</h1>
+            <h1 style="display: none">pytorch入门学习1</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="P问题，NP问题，NPC问题，NP难问题"><a href="#P问题，NP问题，NPC问题，NP难问题" class="headerlink" title="P问题，NP问题，NPC问题，NP难问题"></a>P问题，NP问题，NPC问题，NP难问题</h2><p><strong>时间复杂度</strong>表示当问题规模扩大后，程序需要的时间长度增长得有多快，譬如这个数据的规模扩大到数百倍后，程序运行时间是否还是一样，或者也跟着慢了数百倍，甚至慢了数万倍。复杂度被分为两种级别，一种是O(1),O(log(n)),O(n^a),这种被称为是多项式级的复杂度，另外一种是O(a^n),O(n!)是非多项式级的复杂度，其复杂度计算机往往不能承受。</p>
-<p>所有的问题都可以找到复杂度为多项式级的算法？答案是否定的，有些问题甚至找不到一个正确的算法，这被称为不可解问题。</p>
-<p><strong>P问题</strong>：如果一个问题可以找到一个能在多项式的时间里解决它的算法，那这问题属于P问题</p>
-<p><strong>NP问题</strong>：可以在多项式的时间里面验证一个解的问题。所有的P类问题都是NP问题。NP的另外一个定义是，可以在多项式的时间里才出一个解的问题，例如从起点到终点是否有条小于100单位长度的路线，结果我随便画了一条线，发现路径长度为98，符合要求。在这个题中，找一个解很困难，但是验证一个解很容易，验证一个解只需要O(n)的时间复杂度。</p>
-<p>约化（归约）问题A可以约化问题B的含义是，可以用问题B的解法解决问题A，例如求解一元一次方程和解一元二次方程，前者可以约化为后者，我们可以写出两个程序分别对应两个问题，那么我们能找到一个规则，按照这个规则把解一元一次方程程序的数据数据变一下，用在解一元二次方程程序上，两个程序能得到一样的结果。这个规则即是两个方程系数项对应不变，一元二次方程的二次系数为0.按照这个规则把前一个问题转换为后一个问题了。</p>
-<p>问题A约化为问题B有一个直观意义：B的时间复杂度高于或者等于A的时间复杂度。</p>
-<p>约化具有传递性：问题A约化为问题B，问题B约化为问题C则问题A约化为问题C</p>
-<p>约化的标准概念现在就不难理解了：如果能找到这样一个变化法则，对任意一个程序A的输入，都能按照这个法则变换成B的输入，使两程序的输出相同，那么我们说，问题A可以约化为问题B。</p>
-<p>从约化的定义中可以看到，一个问题约化为另外一个问题，时间复杂度增加了，问题的应用范围也增大了，如果不断的约化上去，能找到一个通吃所有NP问题的超级NP问题，只要解决了这个问题，那么所有NP问题都解决了。这种问题不只是一个，可以有很多个，这一类问题就是<strong>NPC问题</strong>（NP-完全问题）</p>
-<p>NPC问题的定义：要求同时满足两个要求，首先是一个NP问题，然后所有的NP问题都能约化到他。</p>
-<p><strong>NP-Hard问题</strong>：他满足NPC定义的第二条但不一定要满足第一条</p>
-<p>本文参考自<a target="_blank" rel="noopener" href="http://www.matrix67.com/blog/archives/105">http://www.matrix67.com/blog/archives/105</a></p>
+              <h2 id="pytorch入门学习（一）"><a href="#pytorch入门学习（一）" class="headerlink" title="pytorch入门学习（一）"></a>pytorch入门学习（一）</h2><h3 id="Tensors"><a href="#Tensors" class="headerlink" title="Tensors"></a>Tensors</h3><pre><code class="hljs elm"><span class="hljs-keyword">import</span> torch</code></pre>
 
+<p>构建一个未初始化的5*3矩阵</p>
+<pre><code class="hljs angelscript">x=torch.empty(<span class="hljs-number">5</span>,<span class="hljs-number">3</span>)</code></pre>
+
+<p>构建一个随机初始化的矩阵</p>
+<pre><code class="hljs angelscript">x=torch.rand(<span class="hljs-number">5</span>,<span class="hljs-number">3</span>)</code></pre>
+
+<p>构建一个全部为0，类型为long的矩阵</p>
+<pre><code class="hljs angelscript">x=torch.zeros(<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,dtype=long)</code></pre>
+
+<p>从数据直接构建tensor</p>
+<pre><code class="hljs apache"><span class="hljs-attribute">x</span>=torch.tensor([<span class="hljs-number">5</span>.<span class="hljs-number">5</span>,<span class="hljs-number">3</span>])//结果显示为tensor([<span class="hljs-number">5</span>.<span class="hljs-number">5000</span>,<span class="hljs-number">3</span>.<span class="hljs-number">0000</span>])</code></pre>
+
+<p>也可以从一个已有的tensor构建一个tensor.这些办法会重用原来tensor的特征，例如数据类型，除非提供新的数据。</p>
+<pre><code class="hljs reasonml">x=x.<span class="hljs-keyword">new</span><span class="hljs-constructor">_ones(5,3,<span class="hljs-params">dtype</span>=<span class="hljs-params">torch</span>.<span class="hljs-params">double</span>)</span></code></pre>
+
+<p>得到tensor的形状：</p>
+<pre><code class="hljs awk">x.size()
+x.shape
+<span class="hljs-regexp">//</span>两者效果一样
+<span class="hljs-regexp">//</span>torch.size()返回的是一个tuple</code></pre>
+
+<h3 id="operation"><a href="#operation" class="headerlink" title="operation"></a>operation</h3><pre><code class="hljs gml"><span class="hljs-symbol">y</span>=torch.rand(<span class="hljs-number">5</span>,<span class="hljs-number">3</span>)
+<span class="hljs-comment">//方法一</span>
+<span class="hljs-symbol">x</span>+<span class="hljs-symbol">y</span>
+<span class="hljs-comment">//方法二</span>
+torch.add(<span class="hljs-symbol">x</span>,<span class="hljs-symbol">y</span>)</code></pre>
+
+<p>也可以把输出当成变量</p>
+<pre><code class="hljs routeros"><span class="hljs-attribute">result</span>=torch.empty(5,3)
+torch.<span class="hljs-builtin-name">add</span>(x,y,<span class="hljs-attribute">out</span>=result)</code></pre>
+
+<p>加法in-place add x to y</p>
+<pre><code class="hljs gml"><span class="hljs-symbol">y</span>.add_(<span class="hljs-symbol">x</span>)</code></pre>
+
+<p>使用标准的Numpy类似的牵引操作</p>
+<pre><code class="hljs angelscript">x[:,<span class="hljs-number">1</span>]<span class="hljs-comment">//取出第2列数据</span>
+x[:,<span class="hljs-number">1</span>:]<span class="hljs-comment">//取出第二列第三列...的数据</span>
+x[<span class="hljs-number">1</span>:,<span class="hljs-number">1</span>:]<span class="hljs-comment">//取出第二行...的数据，在取出第二列...的数据</span></code></pre>
+
+<p>改变大小：如果你想改变一个tensor的大小或者形状</p>
+<pre><code class="hljs apache"><span class="hljs-attribute">x</span>=torch.rand(<span class="hljs-number">4</span>,<span class="hljs-number">4</span>)
+<span class="hljs-attribute">y</span> = x.view(<span class="hljs-number">16</span>)//y变成了一行<span class="hljs-number">16</span>个
+<span class="hljs-attribute">z</span> = x.view(-<span class="hljs-number">1</span>, <span class="hljs-number">8</span>)//设置维度为-<span class="hljs-number">1</span>，则系统自动会帮助你算出，例子中自动算出是<span class="hljs-number">2</span></code></pre>
+
+<p>如果你有一个元素 tensor ，使用 .item() 来获得这个 value</p>
+<h3 id="Numpy和Tensor之间的转化"><a href="#Numpy和Tensor之间的转化" class="headerlink" title="Numpy和Tensor之间的转化"></a>Numpy和Tensor之间的转化</h3><p>在Torch Tensor和NumPy array会<strong>共享内存</strong>，所以改变其中一项也会改变另外一项</p>
+<p>把Torch Tensor转变成Numpy Array</p>
+<pre><code class="hljs stylus">a=torch.ones(<span class="hljs-number">5</span>)<span class="hljs-comment">//tensor</span>
+<span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(a)</span></span>
+b=<span class="hljs-selector-tag">a</span>.numpy()<span class="hljs-comment">//tensor转成numpy</span>
+<span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(b)</span></span>
+<span class="hljs-selector-tag">b</span>[<span class="hljs-number">1</span>]=<span class="hljs-number">2</span><span class="hljs-comment">//修改下标为1的值,共享了内存空间</span></code></pre>
+
+<p>把Numpy Array转变成Torch Tensor</p>
+<pre><code class="hljs livecodeserver"><span class="hljs-keyword">a</span>=np.ones(<span class="hljs-number">5</span>)
+b=torch.from_numpy(<span class="hljs-keyword">a</span><span class="hljs-comment">)//转变为tensor</span>
+np.<span class="hljs-built_in">add</span>(<span class="hljs-keyword">a</span>,<span class="hljs-number">1</span>,out=<span class="hljs-keyword">a</span>)
+print(<span class="hljs-keyword">a</span><span class="hljs-comment">)//[2.,2.,2.,2.,2.]</span></code></pre>
+
+<h3 id="CUDA-Tensors"><a href="#CUDA-Tensors" class="headerlink" title="CUDA Tensors"></a>CUDA Tensors</h3><p>使用.to方法，Tensor可以被移动到别的device上。尤其是在大运算面前，使用GPU运算效率会高很多</p>
+<pre><code class="hljs gml"><span class="hljs-keyword">if</span> torch.cuda.is_available():
+    device=torch.device(<span class="hljs-string">&quot;cuda&quot;</span>)
+    <span class="hljs-symbol">y</span>=torch.ones_like(<span class="hljs-symbol">x</span>, device=device)
+    <span class="hljs-symbol">x</span>=<span class="hljs-symbol">x</span>.to(device)
+    z=<span class="hljs-symbol">x</span>+<span class="hljs-symbol">y</span> <span class="hljs-comment">//z在cuda(GPU)上运算会提速</span>
+
+    <span class="hljs-comment">//使用numpy的时候必须为CPU,在GPU状态下必须先转为CPU</span>
+    <span class="hljs-symbol">y</span>.to(<span class="hljs-string">&quot;cpu&quot;</span>).data.numpy()
+
+    <span class="hljs-comment">//模型转为GPU上运行</span>
+    model=model.cuda()</code></pre>
+
+<p>简单实现一个深度模型算法</p>
+<pre><code class="hljs nix">from __future__ <span class="hljs-built_in">import</span> print_function
+<span class="hljs-built_in">import</span> torch
+<span class="hljs-built_in">import</span> numpy as np
+
+N,D_in,H,<span class="hljs-attr">D_out=64,1000,100,10</span>
+
+<span class="hljs-attr">x=torch.randn(N,D_in,requires_grad=True)</span>
+<span class="hljs-attr">y=torch.randn(N,D_out,requires_grad=True)</span>
+<span class="hljs-attr">w1=torch.randn(D_in,H,requires_grad=True)</span>
+<span class="hljs-attr">w2=torch.randn(H,D_out,requires_grad=True)</span>
+
+<span class="hljs-attr">learning_rate=1e-6</span>
+
+for it <span class="hljs-keyword">in</span> range(<span class="hljs-number">500</span>):
+    <span class="hljs-comment">#fowward pass</span>
+    <span class="hljs-attr">y_pred=x.mm(w1).clamp(min=0).mm(w2)</span>
+
+    <span class="hljs-comment">#compute loss</span>
+    <span class="hljs-attr">loss=(y_pred-y).pow(2).sum()</span>
+    print(it,loss.item())
+
+    <span class="hljs-comment">#backward pass</span>
+    loss.backward()
+
+    <span class="hljs-comment">#update weights of w1 and w2</span>
+    <span class="hljs-keyword">with</span> torch.no_grad():
+        w1 <span class="hljs-attr">-=</span> learning_rate*w1.grad
+        w2 <span class="hljs-attr">-=</span> learning_rate*w2.grad
+        w1.grad.zero_()
+        w2.grad.zero_()</code></pre>
+
+<p>使用model改进一下</p>
+<pre><code class="hljs routeros"><span class="hljs-keyword">from</span> __future__ import print_function
+import torch
+import numpy as np
+
+N,D_in,H,<span class="hljs-attribute">D_out</span>=64,1000,100,10
+
+<span class="hljs-attribute">x</span>=torch.randn(N,D_in,requires_grad=True)
+<span class="hljs-attribute">y</span>=torch.randn(N,D_out,requires_grad=True)
+
+<span class="hljs-comment">#torch方法2 使用model</span>
+<span class="hljs-attribute">model</span>=torch.nn.Sequential(
+    torch.nn.Linear(D_in,H,<span class="hljs-attribute">bias</span>=<span class="hljs-literal">False</span>),
+    torch.nn.ReLU(),
+    torch.nn.Linear(H,D_out,<span class="hljs-attribute">bias</span>=<span class="hljs-literal">False</span>),
+)
+
+<span class="hljs-comment">#用于优化模型的normal初始化</span>
+torch.nn.init.normal_(model[0].weight)
+torch.nn.init.normal_(model[2].weight)
+
+<span class="hljs-comment">#在GPU上运行</span>
+<span class="hljs-comment">#model =model.cuda()</span>
+
+<span class="hljs-attribute">learning_rate</span>=1e-6
+<span class="hljs-comment"># 用于优化</span>
+optimizer =torch.optim.Adam(model.parameters(),<span class="hljs-attribute">lr</span>=learning_rate)
+
+
+<span class="hljs-attribute">loss_fn</span>=torch.nn.MSELoss(reduction=&#x27;sum&#x27;)
+
+<span class="hljs-keyword">for</span> it <span class="hljs-keyword">in</span> range(500):
+    #fowward pass
+    <span class="hljs-attribute">y_pred</span>=model(x)
+
+    #compute loss
+    <span class="hljs-attribute">loss</span>=loss_fn(y_pred,y)
+    <span class="hljs-builtin-name">print</span>(it,loss.item())
+
+    optimizer.zero_grad()
+    #backward pass
+    loss.backward()
+
+    optimizer.<span class="hljs-keyword">step</span>()
+
+    #update weights of w1 <span class="hljs-keyword">and</span> w2
+    with torch.no_grad():
+        <span class="hljs-keyword">for</span> param <span class="hljs-keyword">in</span> model.parameters():
+            <span class="hljs-attribute">param-</span>=learning_rate*param.grad
+
+    model.zero_grad()</code></pre>
             </div>
             <hr>
             <div>
@@ -218,18 +362,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/04/pytorch1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">pytorch入门学习1</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/17/EdgeComputing1/">
-                        <span class="hidden-mobile">边缘计算综述</span>
+                      <a href="/2020/10/19/narithmetic1Np/">
+                        <span class="hidden-mobile">算法篇之NP问题</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -394,7 +532,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "算法篇之NP问题&nbsp;",
+        "pytorch入门学习1&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
